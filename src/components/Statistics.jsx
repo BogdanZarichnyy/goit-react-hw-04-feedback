@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
+export const Statistics = ({ state: { good, neutral, bad }, total, positivePercentage }) => {
 
     return (
         <>

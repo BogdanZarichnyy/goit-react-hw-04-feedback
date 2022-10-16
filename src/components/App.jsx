@@ -26,8 +26,6 @@ export const App = () => {
     const handleCount = ({ target: { innerText } }) => {
         setState( prevState => ({ ...prevState, [innerText.toLowerCase()]: prevState[innerText.toLowerCase()] + 1 }) );
     }
-
-    const { good, neutral, bad } = state;
     
     return (
         <div className={css.data}>
@@ -44,14 +42,12 @@ export const App = () => {
                     {(countTotalFeedback() === 0 ?
                         <Notification title="There is no feedback"/> :
                         <Statistics
-                            good={good}
-                            neutral={neutral}
-                            bad={bad}
+                            state={state}
                             total={countTotalFeedback}
                             positivePercentage={countPositiveFeedbackPercentage}
                         />
                     )}
-                    
+    
                 </Section>
 
             </div>
