@@ -7,8 +7,8 @@ export const Statistics = ({ state: { good, neutral, bad }, total, positivePerce
             <p>Cood: {good}</p>
             <p>Neutral: {neutral}</p>
             <p>Bad: {bad}</p>
-            <p>Total: {total()}</p>
-            <p>Positive feedbacks: {positivePercentage()}%</p>
+            <p>Total: {total}</p>
+            <p>Positive feedbacks: {positivePercentage}%</p>
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Section } from "./Section";
 import { FeedbackOptions } from "./FeedbackOptions";
@@ -14,14 +14,14 @@ export const App = () => {
         neutral: 0,
         bad: 0,
     });
+    const [total, setTotal] = useState(0);
+    const [positivePercentage, setPositivePercentage] = useState(0);
 
-    const countTotalFeedback = () => {
-        return Object.values(state).reduce( (prevTotal, total) => prevTotal + total, 0 );
-    }
-
-    const countPositiveFeedbackPercentage = () => {
-        return `${Math.round( ( 100 / countTotalFeedback() ) * state.good )}%`;
-    }
+    useEffect(() => { 
+        let totalValue = Object.values(state).reduce( (prevTotal, total) => prevTotal + total, 0 );
+        setTotal(totalValue);
+        setPositivePercentage(Math.round( ( 100 / totalValue ) * state.good ));
+    }, [state]);
 
     const handleCount = ({ target: { innerText } }) => {
         setState( prevState => ({ ...prevState, [innerText.toLowerCase()]: prevState[innerText.toLowerCase()] + 1 }) );
@@ -39,12 +39,12 @@ export const App = () => {
                 
                 <Section title="Statistics">
 
-                    {(countTotalFeedback() === 0 ?
+                    {(total === 0 ?
                         <Notification title="There is no feedback"/> :
                         <Statistics
                             state={state}
-                            total={countTotalFeedback}
-                            positivePercentage={countPositiveFeedbackPercentage}
+                            total={total}
+                            positivePercentage={positivePercentage}
                         />
                     )}
     
